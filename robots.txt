@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://csy870617.github.io/faithmbti2/sitemap.xml

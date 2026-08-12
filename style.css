@@ -1,0 +1,478 @@
+/* =========================================
+   1. RESET & GLOBAL
+   ========================================= */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ✨ 스크롤바 숨기기 (기능은 유지됨) */
+::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #4f46e5, #a855f7);
+}
+
+html { font-size: 100%; /* JS로 조절됨 */ }
+
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: radial-gradient(circle at top, #f3f0ff, #f8fafc);
+  background-attachment: fixed;
+  background-size: cover;
+  color: #111827;
+  min-height: 100vh;
+  display: block;
+  padding: 20px;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  word-break: keep-all;
+  word-wrap: break-word;
+}
+
+.hidden { display: none !important; }
+
+.app {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+  min-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================
+   2. HEADER
+   ========================================= */
+header {
+  padding: 24px 32px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header-row {
+  display: flex; justify-content: space-between; align-items: center; width: 100%;
+}
+
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; cursor: pointer; }
+.logo-badge {
+  width: 32px; height: 32px; border-radius: 12px;
+  background: var(--primary-gradient);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 1.1rem; flex-shrink: 0;
+  box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+}
+.logo-sub { font-size: 0.875rem; color: #64748b; font-weight: 500; }
+
+.font-controls {
+  display: flex; gap: 4px; background: #f1f5f9; padding: 4px; border-radius: 10px; flex-shrink: 0;
+}
+.font-controls button {
+  border: none; background: #ffffff; color: #64748b;
+  font-size: 0.75rem; font-weight: 700; padding: 6px 10px; border-radius: 8px; cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all 0.2s ease;
+}
+.font-controls button:hover { background: #eef2ff; color: #4f46e5; }
+
+/* =========================================
+   3. LAYOUT & INTRO
+   ========================================= */
+main {
+  padding: 40px 32px;
+  display: flex; 
+  flex-direction: column; 
+  flex: 1;
+  position: relative;
+  justify-content: center;
+}
+
+main > section {
+  margin: auto 0;
+  width: 100%;
+}
+
+.intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro .card {
+  max-width: 600px;
+  width: 100%;
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 왼쪽 정렬 */
+  text-align: left;        /* 왼쪽 정렬 */
+}
+
+.intro-title {
+  font-size: 2.2rem;
+  font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.3;
+}
+.intro-highlight { background: linear-gradient(120deg, #4f46e5, #a855f7); -webkit-background-clip: text; color: transparent; }
+.intro-text { font-size: 1.1rem; font-weight: 500; color: #475569; line-height: 1.6; margin-bottom: 32px; }
+
+.intro-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start; margin-bottom: 32px; }
+.tag { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; font-size: 0.9rem; border-radius: 999px; background: #f5f3ff; color: #5b21b6; font-weight: 600; text-decoration: none; }
+.tag-dot { width: 6px; height: 6px; background: #7c3aed; border-radius: 999px; }
+
+/* =========================================
+   4. CARDS & BUTTONS
+   ========================================= */
+.card {
+  border-radius: 28px;
+  background: radial-gradient(circle at top left, #ffffff, #f8fafc);
+  padding: 32px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+}
+.card-title { font-size: 1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; color: #1e293b; }
+
+.start-btn {
+  width: 100%; padding: 16px 20px;
+  border-radius: 16px; border: none;
+  background: var(--primary-gradient); color: #fff; font-weight: 700;
+  font-size: 1.05rem; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  display: flex; justify-content: center; align-items: center; gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4); }
+
+.btn, .btn-secondary {
+  border-radius: 12px; border: 1px solid #e2e8f0; background: #fff;
+  padding: 8px 16px; font-size: 0.85rem; font-weight: 600; color: #475569;
+  cursor: pointer; transition: 0.2s;
+}
+.btn:hover, .btn-secondary:hover { background: #f8fafc; border-color: #cbd5e1; }
+
+.btn-primary {
+  padding: 8px 16px; border-radius: 12px; border: none;
+  background: var(--primary-gradient); color: #fff; font-weight: 600;
+  font-size: 0.85rem; cursor: pointer; transition: 0.2s;
+}
+.btn-primary:hover { opacity: 0.9; }
+.btn-primary.small { padding: 6px 12px; font-size: 0.75rem; }
+
+.btn-secondary.big {
+  width: 100%; margin-top: 16px; padding: 14px;
+  font-size: 1rem; font-weight: 700; border-radius: 14px;
+  background-color: #f8fafc; border: 2px solid #e2e8f0; color: #475569;
+}
+.dev-btn { margin-top: 12px; background: #fff; border: 1px solid #e2e8f0; color: #64748b; box-shadow: none; font-size: 0.9rem; }
+
+/* =========================================
+   5. BANNERS
+   ========================================= */
+.book-ad-banner {
+  margin-top: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  transition: all 0.2s ease;
+}
+.book-ad-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  border-color: #cbd5e1;
+}
+.book-ad-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+.book-ad-badge {
+  display: inline-block;
+  background: #fff7ed;
+  color: #ea580c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  width: fit-content;
+  margin-bottom: 4px;
+}
+.book-ad-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.3;
+}
+.book-ad-desc {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+@keyframes floatBook {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+.book-ad-img {
+  width: 70px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-left: 16px;
+  animation: floatBook 3s ease-in-out infinite; 
+}
+
+.engo-bottom-banner {
+  width: 100%; margin-top: 24px;
+  padding: 14px 18px; border-radius: 20px;
+  background: linear-gradient(135deg, #4f46e5, #a855f7);
+  box-shadow: 0 8px 20px -5px rgba(79, 70, 229, 0.3);
+  color: #ffffff; text-decoration: none;
+  display: flex; align-items: center; gap: 14px;
+  transition: transform 0.2s ease;
+}
+.engo-bottom-banner:hover { transform: translateY(-2px); }
+.engo-icon { width: 44px; height: 44px; border-radius: 12px; background: #fff; border: 2px solid rgba(255,255,255,0.3); object-fit: cover; flex-shrink: 0; }
+.engo-content { display: flex; flex-direction: column; gap: 1px; text-align: left; }
+.engo-title { font-size: 1rem; font-weight: 800; color: #fff; }
+.engo-desc { font-size: 0.8rem; font-weight: 500; color: rgba(255, 255, 255, 0.9); }
+.intro .engo-bottom-banner { grid-column: 1 / -1; }
+
+/* =========================================
+   6. TEST SECTION
+   ========================================= */
+.progress-wrapper { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.progress-header { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; color: #64748b; }
+.progress-bar { width: 100%; height: 10px; background: #f1f5f9; border-radius: 999px; overflow: hidden; }
+.progress-fill { width: 0%; height: 100%; background: var(--primary-gradient); transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
+.question-card {
+  border-radius: 24px; padding: 32px; background: #ffffff;
+  border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  display: flex; flex-direction: column; gap: 20px; min-height: 300px; justify-content: center;
+}
+.question-code { font-size: 0.9rem; font-weight: 700; color: #8b5cf6; text-transform: uppercase; }
+.question-text { font-size: 1.5rem; font-weight: 700; color: #1e293b; line-height: 1.4; }
+.question-sub { font-size: 0.9rem; color: #64748b; }
+
+.scale-labels { display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; margin-bottom: 12px; font-weight: 500; }
+.scale-inputs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.scale-option input { display: none; }
+.scale-pill { padding: 12px 0; border-radius: 12px; border: 2px solid #f1f5f9; background: #fff; font-size: 1.1rem; font-weight: 700; color: #94a3b8; cursor: pointer; text-align: center; transition: all 0.2s; }
+.scale-pill:hover { border-color: #c4b5fd; color: #7c3aed; }
+.scale-option input:checked + .scale-pill { border-color: #7c3aed; background: #f5f3ff; color: #7c3aed; }
+.nav-buttons { display: flex; gap: 12px; width: 100%; margin-top: 20px; }
+#skip-btn { margin-left: auto; color: #94a3b8; border: none; }
+
+/* =========================================
+   7. RESULT & CHURCH (Flat UI)
+   ========================================= */
+.type-pill { display: inline-block; padding: 6px 12px; background: #f5f3ff; color: #7c3aed; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 16px; }
+.result-layout { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
+.result-main-column { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 20px; }
+.result-side-column { display: flex; flex-direction: column; gap: 16px; }
+.result-card { border-radius: 20px; padding: 24px; background: #ffffff; border: 1px solid #e2e8f0; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+
+.result-main-title { font-size: 2.5rem; font-weight: 900; letter-spacing: -0.02em; color: #4f46e5; line-height: 1; }
+.result-main-name { font-size: 1.2rem; font-weight: 700; margin-top: 8px; color: #1e293b; }
+.result-main-summary { margin-top: 12px; font-size: 1rem; color: #475569; line-height: 1.6; }
+.result-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.badge { padding: 6px 12px; border-radius: 8px; border: 1px solid #e2e8f0; background: #f8fafc; font-size: 0.85rem; font-weight: 600; color: #475569; }
+
+#character-block { margin-top: 20px; display: flex; gap: 16px; align-items: flex-start; background: #f8fafc; padding: 16px; border-radius: 16px; }
+#character-emoji { font-size: 2.5rem; line-height: 1; }
+.character-title { font-weight: 800; font-size: 1rem; margin-bottom: 4px; color: #1e293b; }
+.character-text { font-size: 0.9rem; color: #475569; line-height: 1.5; }
+
+.result-card ul { list-style: none; display: grid; gap: 8px; }
+.result-card li { padding-left: 4px; }
+.result-card li::before { content: "›"; color: #6366f1; margin-right: 8px; font-weight: 800; }
+
+.verse-box { padding: 16px; border-radius: 16px; background: #f0fdf4; border: 1px dashed #86efac; font-size: 0.9rem; margin-top: 12px; }
+.verse-ref { font-weight: 800; margin-bottom: 6px; font-size: 1rem; color: #166534; }
+.verse-text { margin-bottom: 8px; font-size: 1.05rem; font-style: italic; color: #14532d; }
+
+.axis-row, .detail-score-row { margin-bottom: 12px; }
+.axis-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #64748b; margin-bottom: 4px; font-weight: 600; }
+.axis-bar-bg, .detail-score-bar-bg { width: 100%; height: 12px; background-color: #f1f5f9; border-radius: 999px; overflow: hidden; display: flex; margin-top: 8px; }
+.axis-bar-fill, .detail-score-bar-fill { height: 100%; background: var(--primary-gradient); }
+.detail-score-bar-fill { background: #8b5cf6; }
+.axis-sub-label { font-size: 0.75rem; color: #94a3b8; }
+
+.match-card { padding: 12px 16px; border-radius: 12px; background: #ffffff; border: 1px solid #e2e8f0; margin-top: 8px; }
+.match-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; color: #334155; }
+.match-item { padding: 8px 12px; border-radius: 8px; background: #eff6ff; font-size: 0.85rem; margin-bottom: 6px; border: 1px solid #dbeafe; }
+.match-item-opposite { background: #fff1f2; border-color: #ffe4e6; }
+.match-item-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; color: #1e293b; }
+
+#other-types-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.btn-type { padding: 8px; font-size: 0.9rem; font-weight: 500; border-radius: 12px; border: 1px solid #e2e8f0; background: #fff; cursor: pointer; color: #475569; }
+.btn-type:hover { background: #f8fafc; border-color: #cbd5e1; }
+.btn-type.active { background: #1e293b; color: #fff; border-color: #1e293b; font-weight: 700; }
+
+.result-footer { 
+  display: block; 
+  padding-top: 24px; 
+  border-top: 1px solid #f1f5f9; 
+  font-size: 0.85rem; color: #94a3b8; 
+}
+.result-footer .gray { margin-bottom: 16px; }
+
+.result-footer-right { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 10px; 
+  width: 100%; 
+}
+
+#church-btn.btn-primary {
+  width: 100%;
+  padding: 16px 0;
+  font-size: 1rem;
+  background: #ede9fe; 
+  color: #1e293b;      
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+  font-weight: 800;    
+}
+#church-btn.btn-primary:hover {
+  background: #ddd6fe; 
+  transform: translateY(-2px);
+}
+
+.footer-sub-btns {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+.footer-sub-btns button {
+  flex: 1; /* 1:1 비율 */
+  padding: 12px 0;
+}
+
+/* CHURCH (Flat) */
+.church-form { display: grid; gap: 12px; margin-top: 16px; margin-bottom: 16px; }
+.church-form-group { display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; font-weight: 600; color: #475569; }
+.church-form-group input { padding: 10px 12px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 0.95rem; background: #ffffff; }
+.remember-check-box { display: flex; align-items: center; gap: 6px; margin-top: 4px; margin-bottom: 8px; font-size: 0.85rem; color: #64748b; }
+
+.church-auth-header {
+  display: flex; justify-content: center; align-items: center; position: relative; margin-bottom: 24px;
+}
+.church-auth-title {
+  font-size: 1.1rem; font-weight: 700; margin: 0; color: #1e293b;
+}
+.church-auth-close {
+  position: absolute; right: 0; top: 0;
+  background: none; border: none; font-size: 1.5rem; color: #94a3b8; cursor: pointer; padding: 0 8px;
+}
+
+.church-list-header { font-size: 1.1rem; font-weight: 800; color: #4f46e5; margin-top: 24px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.member-table-container { overflow-x: auto; margin-bottom: 24px; border-top: 2px solid #f1f5f9; }
+#church-result-list table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+#church-result-list th { background: #f8fafc; font-weight: 700; color: #64748b; padding: 12px 8px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+#church-result-list td { padding: 12px 8px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+#church-result-list tr:last-child td { border-bottom: none; }
+
+.analysis-bar-container { 
+  width: 100%; height: 12px; background-color: #f1f5f9; border-radius: 999px; overflow: hidden; display: flex; margin-top: 8px; 
+}
+
+.analysis-report-container { background-color: #f8fafc; border-radius: 16px; padding: 24px; margin-top: 24px; }
+.analysis-section-flat { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px dashed #cbd5e1; }
+.analysis-section-flat:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.analysis-header { font-size: 1.1rem; font-weight: 800; color: #1e293b; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.analysis-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.summary-item { background: #ffffff; border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
+.summary-val { font-size: 1.4rem; font-weight: 800; color: #4f46e5; }
+.summary-label { font-size: 0.85rem; color: #64748b; margin-top: 4px; }
+.insight-text { background: #ffffff; padding: 20px; border-radius: 12px; font-size: 0.95rem; line-height: 1.6; color: #334155; text-align: center; border: 1px solid #e2e8f0; }
+.insight-highlight { font-weight: 700; color: #4f46e5; background: #eef2ff; padding: 2px 6px; border-radius: 4px; }
+.content-box-flat { background: #ffffff; border-radius: 12px; padding: 16px; font-size: 0.95rem; line-height: 1.6; color: #334155; border: 1px solid #e2e8f0; }
+.close-analysis-btn { width: 100%; margin-top: 24px; padding: 12px; background: #ffffff; border: 1px solid #cbd5e1; color: #475569; border-radius: 12px; font-weight: 700; cursor: pointer; }
+.growth-item { margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.growth-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.balance-badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.7rem; font-weight: 700; margin-left: 6px; vertical-align: middle; }
+.badge-balanced { background: #dbeafe; color: #2563eb; }
+
+/* [수정] 박스 제거 & 회색 글씨 */
+.invite-guide-box {
+  background: transparent;
+  color: #94a3b8; /* 연한 회색 */
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 12px;
+  padding: 0;
+}
+
+/* =========================================
+   8. MEDIA QUERIES
+   ========================================= */
+@media (min-width: 681px) and (max-width: 1024px) {
+  .app { max-width: 100%; border-radius: 0; box-shadow: none; }
+  body { padding: 0; background: #ffffff; }
+  main { padding: 32px; }
+  .result-layout { grid-template-columns: 1fr 1.1fr; gap: 20px; }
+}
+
+@media (max-width: 680px) {
+  body { padding: 0; }
+  .app { border-radius: 0; }
+  header { padding: 16px 20px; }
+  main { padding: 24px 20px; gap: 24px; }
+
+  .intro .card { padding: 32px 24px; }
+  .intro-title { font-size: 1.7rem !important; margin-bottom: 12px; }
+  
+  .result-layout { grid-template-columns: 1fr; gap: 32px; }
+  .result-main-column { position: static; }
+  
+  .book-banner-simple { padding: 16px; gap: 12px; }
+  .book-banner-simple-text { flex: 1 1 100%; }
+  .book-banner-simple-btn { width: 100%; text-align: center; margin-top: 4px; padding: 12px; }
+
+  #church-result-list thead { display: none; }
+  #church-result-list table, #church-result-list tbody, #church-result-list tr, #church-result-list td { display: block; width: 100%; }
+  #church-result-list tr { 
+    margin-bottom: 12px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+    position: relative; /* 삭제 버튼 절대 배치를 위해 */
+    padding-right: 50px; /* 삭제 버튼 공간 확보 */
+    min-height: 80px; 
+  }
+  #church-result-list td { padding: 4px 0; border: none; font-size: 0.95rem; }
+  #church-result-list td:nth-child(1) { font-weight: 800; font-size: 1.1rem; color: #1e293b; margin-bottom: 4px; }
+  #church-result-list td:nth-child(2)::before { content: "유형: "; color: #64748b; font-weight: 600; margin-right:4px; }
+  #church-result-list td:nth-child(3)::before { content: "설명: "; color: #64748b; font-weight: 600; margin-right:4px; }
+  
+  /* 삭제 버튼(마지막 셀) 우측 상단 배치 */
+  #church-result-list td:nth-child(4) { 
+    position: absolute; top: 12px; right: 12px;
+    margin-top: 0; border-top: none; padding-top: 0; 
+  }
+}
+
+@media (max-width: 380px) {
+  .logo { font-size: 1.2rem; }
+  .intro-title { font-size: 1.5rem !important; }
+  .result-main-title { font-size: 1.8rem; }
+
+}

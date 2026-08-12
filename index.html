@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>신앙 유형 검사</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="당신의 신앙 유형은 무엇인가요?" />
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="신앙 유형 검사" />
+  <meta property="og:description" content="당신의 신앙 유형은 무엇인가요?" />
+  <meta property="og:site_name" content="신앙 유형 검사" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:url" content="https://csy870617.github.io/faithmbti2/" />
+  <meta property="og:image" content="https://csy870617.github.io/faithmbti2/images/thumbnail.jpg" />
+  
+  <link rel="canonical" href="https://csy870617.github.io/faithmbti2/" />
+  <link rel="stylesheet" href="style.css" />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2078760660134095" crossorigin="anonymous"></script>
+
+  <script>
+    (function() {
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.match(/kakaotalk|line|inapp|naver|instagram/i)) {
+        if (ua.match(/android/i)) {
+          // location.hash(#test/#result/#church)가 남아있으면 '#Intent;'와 겹쳐 인텐트 파싱이 깨지므로 제거하고,
+          // 크롬이 없는 기기에서도 빈 화면에 멈추지 않도록 fallback url을 함께 지정한다.
+          var target = (location.origin + location.pathname + location.search).replace(/https?:\/\//i, '');
+          location.href = 'intent://' + target + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(location.href) + ';end';
+        }
+      }
+    })();
+  </script>
+
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script>
+    try {
+      if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
+          Kakao.init("9bde8b67ddb17b795d596ab3bd943668");
+      }
+    } catch (e) { console.warn("Kakao SDK 로드 실패:", e); }
+  </script>
+  
+  <script src="data.js" defer></script>
+  <script type="module" src="app.js"></script>
+</head>
+
+<body>
+  <div class="app">
+    
+    <header>
+      <div class="header-row">
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer;">
+          <span class="logo-badge">🕊</span>
+          신앙 유형 검사
+        </div>
+
+        <div class="font-controls">
+          <button id="font-down" aria-label="글자 작게">A-</button>
+          <button id="font-reset" aria-label="글자 표준">표준</button>
+          <button id="font-up" aria-label="글자 크게">A+</button>
+        </div>
+      </div>
+      <div class="logo-sub">하나님을 만나는 공동체 신앙 유형 테스트</div>
+    </header>
+
+    <main>
+      <section id="intro-section" class="intro">
+        <div class="card">
+          <h1 class="intro-title">
+            당신의 <span class="intro-highlight">신앙 유형</span>은 무엇인가요?
+          </h1>
+          <br />
+          <p class="intro-text">
+            ⛪ <strong>이 검사는 신앙생활 할 때 나타나는 성향을 보여줍니다.</strong> 그렇기에 기존 MBTI와 다르게 나올 수 있습니다. <br />
+            🔥 이 테스트는 우리가 하나님을 어떻게 경험하고 표현하는지 알아보는 도구입니다.
+          </p>
+
+          <div class="intro-tags">
+            <span class="tag"><span class="tag-dot"></span> 40문항 · 7~10분</span>
+            <a href="blog/index.html" class="tag" style="text-decoration: none; cursor: pointer;">
+              <span class="tag-dot"></span> 16가지 유형 보기 ➚
+            </a>
+          </div>
+
+          <button class="start-btn" id="start-btn" style="margin-bottom: 12px;">
+            신앙 유형 검사 시작하기 <span>›</span>
+          </button>
+
+          <button class="start-btn dev-btn" id="go-result-btn">
+            🔍 결과 페이지 바로 보기 <span>›</span>
+          </button>
+
+          <!-- TODO: 아래 도서 배너는 원본 사이트(FAITH MBTI)의 홍보 영역입니다. 새 사이트에 맞게 교체하거나 삭제하세요. -->
+          <a href="https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000012331585" target="_blank" class="book-ad-banner">
+            <div class="book-ad-content">
+              <div class="book-ad-badge">추천도서</div>
+              <div class="book-ad-title">FAITH MBTI<br>신앙에도 유형이 있다</div>
+              <div class="book-ad-desc">더 깊은 이해를 위한 필독서</div>
+            </div>
+            <img src="ad/01.png" alt="FAITH MBTI 책 표지" class="book-ad-img">
+          </a>
+
+        </div>
+      </section>
+
+      <section id="test-section" class="hidden">
+        <div class="progress-wrapper">
+          <div class="progress-header">
+            <span id="progress-label">문항 1 / 40</span>
+          </div>
+          <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="question-card">
+          <div id="question-code" class="question-code">Q1</div>
+          <div id="question-text" class="question-text">질문</div>
+          <div class="question-sub">
+            마음에 가장 <strong>자연스럽게</strong> 느껴지는 쪽을 선택해 주세요.
+          </div>
+          <div class="scale">
+            <div class="scale-labels"><span>전혀 아니다</span><span>매우 그렇다</span></div>
+            <div id="scale-inputs" class="scale-inputs"></div>
+          </div>
+          <div class="nav-buttons">
+            <button id="back-btn" class="btn">‹ 이전</button>
+            <button id="skip-btn" class="btn">건너뛰기</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="result-section" class="hidden">
+        <div class="type-pill">나의 신앙 유형</div>
+
+        <div class="result-layout">
+          <div class="result-main-column">
+            <div class="result-card">
+              <div id="result-code" class="result-main-title"></div>
+              <div id="result-name" class="result-main-name"></div>
+              <p id="result-summary" class="result-main-summary"></p>
+              <div id="result-badges" class="result-badges"></div>
+              <div id="character-block">
+                <div id="character-emoji"></div>
+                <div>
+                  <div id="character-title" class="character-title"></div>
+                  <div id="character-text" class="character-text"></div>
+                </div>
+              </div>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">성향 분포</h3>
+              <div id="axis-upgraded"></div>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">세부 점수</h3>
+              <div id="detail-score-list"></div>
+            </div>
+          </div>
+
+          <div class="result-side-column">
+            <div class="result-card">
+              <h3 class="card-title">🌿 이 유형의 특징</h3>
+              <ul id="result-features"></ul>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">💪 강점  🔎 약점</h3>
+              <div id="result-strength"></div>
+              <div id="result-weakness" class="gray"></div>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">⚠️ 주의할 점</h3>
+              <div id="result-warning" class="gray"></div>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">⛪ 잘 맞는 사역</h3>
+              <ul id="result-ministries"></ul>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">🧭 성장 포인트</h3>
+              <ul id="result-growth"></ul>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">🧩 성경 인물</h3>
+              <button id="bible-toggle-btn" class="btn-primary small"> 성경 인물 보기 </button>
+              <div id="bible-box" class="hidden verse-box">
+                <div id="bible-character" class="verse-ref"></div>
+                <div id="bible-verse" class="verse-text small-hint"></div>
+              </div>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">💡 오늘의 말씀</h3>
+              <button id="today-verse-btn" class="btn-primary small">📖 나를 위한 말씀 보기</button>
+              <div id="today-verse-box" class="hidden verse-box">
+                <div id="today-verse-box-ref" class="verse-ref"></div>
+                <div id="today-verse-box-text" class="verse-text"></div>
+                <div id="today-verse-box-apply" class="verse-apply"></div>
+              </div>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">🤲 유형 관계 보기</h3>
+              <div class="small-hint">나와 비슷한 친구, 나를 균형 있게 도와줄 친구</div>
+              <div class="match-card">
+                <div class="match-title">함께 사역하면 좋은 유형</div>
+                <div id="match-top2" class="match-list"></div>
+              </div>
+              <div class="match-card">
+                <div class="match-title">균형을 도와줄 반대 유형</div>
+                <div id="match-opposite" class="match-list"></div>
+              </div>
+            </div>
+            <div class="result-card">
+              <h3 class="card-title">🔎 다른 유형 보기</h3>
+              <div id="other-types-grid"></div>
+            </div>
+            <div class="result-footer">
+              <div class="gray">
+                이 결과는 성향 이해를 돕는 도구일 뿐입니다.<br />
+                우리는 언제든지 성령 안에서 변화되고 성장할 수 있습니다.<br />
+                <span style="color:#e94f57; font-weight:600;">'처음으로' 버튼을 누르면 검사 내용이 초기화됩니다.</span>
+              </div>
+              
+              <div class="result-footer-right">
+                <button id="church-btn" class="btn-primary" style="width:100%; padding: 16px 0; font-size:1rem;">공동체 신앙 유형 분석하기</button>
+                
+                <div class="footer-sub-btns">
+                  <button id="share-btn" class="btn-secondary" style="background:#f1f5f9; border:none; color:#475569;">공유하기</button>
+                  <button id="restart-btn" class="btn-secondary" style="background:#f1f5f9; border:none; color:#475569;">처음으로</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- TODO: 아래 FAITHS 배너도 원본 사이트의 홍보 영역입니다. -->
+          <a href="https://csy870617.github.io/faiths/" target="_blank" class="engo-bottom-banner" style="margin-top: 40px;">
+            <img src="ad/logo_2.png" alt="FAITHS Icon" class="engo-icon">
+            <div class="engo-content">
+              <div class="engo-title">FAITHS로 함께 성장해요</div>
+              <div class="engo-desc">강력추천! 크리스천 성장 도구 플랫폼</div>
+            </div>
+          </a>
+      </section>
+
+      <section id="church-section" class="hidden">
+        
+        <div class="result-card" id="church-auth-card">
+          <div class="church-auth-header">
+            <h3 class="church-auth-title">우리교회 그룹 만들기</h3>
+            <button id="church-auth-close-btn" class="church-auth-close">&times;</button>
+          </div>
+          
+          <div class="church-form">
+            <div class="church-form-group">
+              <label for="setup-church-input">그룹명</label>
+              <input id="setup-church-input" type="text" placeholder="예: OO교회 청년부" />
+            </div>
+            <div class="church-form-group">
+              <label for="setup-password-input">비밀번호</label>
+              <input id="setup-password-input" type="password" placeholder="비밀번호를 만들고 공유하세요" />
+            </div>
+            
+            <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+              <input type="checkbox" id="auto-login-check" style="width:auto; cursor:pointer;">
+              <label for="auto-login-check" style="font-size:0.9rem; color:#64748b; cursor:pointer;">자동 로그인</label>
+            </div>
+            
+            <div style="display:flex; gap:8px; margin-top:16px;">
+              <button id="group-create-btn" class="btn-primary" style="flex:1; padding:12px 0;">그룹 생성</button>
+              <button id="group-login-btn" class="btn-secondary" style="flex:1; padding:12px 0; background:#f1f5f9; border:none; color:#475569;">입장하기</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="church-main-content" class="hidden">
+          <div class="result-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <h3 class="card-title" style="margin-bottom:0;">내 결과 저장</h3>
+              <button id="church-main-close-btn" style="background:none; border:none; font-size:1.5rem; color:#94a3b8; cursor:pointer; padding:0 8px;">&times;</button>
+            </div>
+            
+            <div style="font-size:0.9rem; color:#475569; margin-bottom:12px;">내 신앙 유형을 저장하고 공동체 유형을 확인하세요.</div>
+            
+            <div class="church-form">
+              <div class="church-form-group">
+                <label for="member-name-input">이름</label>
+                <input id="member-name-input" type="text" placeholder="예: 홍길동" />
+              </div>
+              <div class="church-form-group hidden">
+                <label for="member-church-input">그룹명</label>
+                <input id="member-church-input" type="text" />
+              </div>
+              <div class="church-form-group hidden">
+                <label for="member-password-input">비밀번호</label>
+                <input id="member-password-input" type="password" />
+              </div>
+              
+              <div class="church-button-row" style="display:flex; gap:8px;">
+                <button id="member-save-btn" class="btn-primary small" style="flex:1;">내 결과 저장</button>
+                <button id="church-summary-btn" class="btn-secondary small" style="flex:1; background:#f1f5f9; border:none; color:#4f46e5;">공동체 유형 확인</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="church-community-area" class="hidden" style="margin-top:32px;">
+             <input id="view-church-input" type="text" class="hidden" />
+             <input id="view-password-input" type="password" class="hidden" />
+
+             <div id="church-result-list"></div>
+
+             <div id="church-after-actions" class="hidden" style="margin-top:20px; display:flex; gap:8px;">
+                <button id="church-analysis-btn" class="btn-primary small" style="flex:1;">📊 공동체 분석</button>
+                <button id="invite-btn-bottom" class="btn-secondary small" style="flex:1; background:#f1f5f9; border:none; color:#475569;">멤버초대</button>
+                <button id="church-copy-btn" class="btn-secondary small" style="flex:1; background:#f1f5f9; border:none; color:#475569;">결과 공유</button>
+             </div>
+             
+             <div class="invite-guide-box">
+                멤버초대 후 그룹명과 비밀번호를 공유하세요!
+             </div>
+
+             <div id="church-analysis-result" class="hidden" style="margin-top:20px;"></div>
+          </div>
+        </div>
+        
+      </section>
+    </main>
+
+    <footer style="text-align: center; padding: 24px 0; border-top: 1px solid #f1f5f9; font-size: 0.8rem; color: #94a3b8;">
+      <div style="margin-bottom: 12px;">
+        <a href="privacy.html" target="_blank" style="text-decoration: none; color: #64748b; font-weight: 600;">개인정보처리방침</a>
+      </div>
+      <div style="line-height: 1.5;">© 2026 신앙 유형 검사. All rights reserved.<br/>Contact: csy870617@gmail.com</div>
+    </footer>
+  </div>
+</body>
+</html>
