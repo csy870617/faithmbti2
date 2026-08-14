@@ -105,8 +105,35 @@ main > section {
 
 .intro {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* 홈 화면 하단 브랜드 로고 */
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #f1f5f9;
+}
+.brand-mark-badge {
+  width: 26px; height: 26px; border-radius: 9px;
+  background: var(--primary-gradient);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 0.9rem; flex-shrink: 0;
+  box-shadow: 0 3px 6px rgba(79, 70, 229, 0.18);
+}
+.brand-mark-text {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #64748b;
 }
 
 .intro .card {
